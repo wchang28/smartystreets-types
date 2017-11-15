@@ -23,19 +23,19 @@ export namespace USStreetAddress {
 
     export interface Components {
         urbanization?: string;                  // Primarily for Puerto Rican addresses; a very important component which contains area, sector, or development within a geographic area; should be included after the name of the recipient
-        primary_number?: string;	            // The house, PO Box, or building number
+        primary_number?: string;                // The house, PO Box, or building number
         street_name?: string;	                // The name of the street
         street_predirection?: string;	        // Directional information before a street name (N, SW, etc.)
         street_postdirection?: string;	        // Directional information after a street name (N, SW, etc.)
         street_suffix?: string;	                // Abbreviated value describing the street (St, Ave, Blvd, etc.)
-        secondary_number?: string;	            // Apartment or suite number, if any
+        secondary_number?: string;              // Apartment or suite number, if any
         secondary_designator?: string;	        // Describes location within a complex/building (Ste, Apt, etc.)
         extra_secondary_number?: string;        // Descriptive information about the location of a building within a campus (e.g., E-5 in "5619 Loop 1604, Bldg E-5, Ste. 101 San Antonio TX")
         extra_secondary_designator?: string;	// Description of the location type within a campus (e.g., Bldg, Unit, Lot, etc.)
         pmb_designator?: string;                // Private mailbox unit designator (assigned by a CMRA)
         pmb_number?: string;	                // The private mailbox number, assigned by a CMRA
-        city_name?: string;	                    // The USPS-preferred city name for this particular address
-        default_city_name?: string;	            // The default city name for this 5-digit ZIP Code. This field will not be present if the default city name is equal to the value of the city name field.
+        city_name?: string;                     // The USPS-preferred city name for this particular address
+        default_city_name?: string;             // The default city name for this 5-digit ZIP Code. This field will not be present if the default city name is equal to the value of the city name field.
         state_abbreviation?: string;            // The two-letter state abbreviation
         zipcode?: string;                       // The 5-digit ZIP Code
         plus4_code?: string;                    // The 4-digit add-on code (more specific than 5-digit ZIP)
@@ -93,7 +93,7 @@ export namespace USStreetAddress {
         building_default_indicator?: string;    // Indicates whether the address is the "default" address for a building; for example, the main lobby
         rdi?: ResidentialDeliveryIndicator;     // Residential Delivery Indicator (residential or commercial)
         elot_sequence?: string;	                // eLOT (Enhanced Line of Travel) 4-digit sequence number
-        elot_sort?: eLOTSoreOrder;	            // eLOT (Enhanced Line of Travel) product was developed to give mailers the ability to sort their mailings by line of travel sequence.
+        elot_sort?: eLOTSoreOrder;              // eLOT (Enhanced Line of Travel) product was developed to give mailers the ability to sort their mailings by line of travel sequence.
         latitude?: number;                      // The horizontal component used for geographic positioning. It is the angle between 0° (the equator) and ±90° (north or south) at the poles. It is the first value in an ordered pair of (latitude, longitude). A negative number denotes a location below the equator; a positive number is above the equator. Combining lat/long values enables you to pinpoint addresses on a map.
         longitude?: number;                     // The vertical component used for geographic positioning. It is the angle between 0° (the Prime Meridian) and ±180° (westward or eastward). It is the second number in an ordered pair of (latitude, longitude). A negative number indicates a location west of Greenwich, England; a positive number east. Combining lat/long values enables you to pinpoint addresses on a map.
         precision?: CoordinatesPrecision        // Indicates the precision of the latitude and longitude values.
@@ -279,9 +279,9 @@ export namespace InternationalStreetAddress {
         language?: string;              // When not set, the output language will match the language of the input values. When set to native the results will always be in the language of the output country. When set to latin the results will always be provided using a Latin character set.
         freeform?: string;              // The entire address in a single field (without the country). If freeform is specified, all other address input fields (except country) will be ignored. (e.g., Via Santa Maria di Costantinopoli, 72 46030-Tabellano MN)
         address1?: string;              // The first address line (e.g., Calle Proc. San Sebastián, 15)
-        address2?: string;	            // The second address line (if any)
-        address3?: string;	            // The third address line (if any)
-        address4?: string;	            // The fourth address line (if any)
+        address2?: string;              // The second address line (if any)
+        address3?: string;              // The third address line (if any)
+        address4?: string;              // The fourth address line (if any)
         organization?: string;          // The name of the recipient, firm, or company at this address (e.g., Robert Smith OR The Clean Oil Company)
         locality?: string;              // The city name (e.g., Paris)
         administrative_area?: string;   // The state or province name or abbreviation (e.g., Alberta or AB)
