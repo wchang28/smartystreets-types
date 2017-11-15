@@ -1,0 +1,20 @@
+{
+  "name": "smartystreets-types",
+  "version": "0.0.1",
+  "description": "Type Definition for SmartyStreets API",
+  "typings": "./js/index.d.ts",
+  "scripts": {},
+  "keywords": [
+    "SmartyStreets",
+    "API",
+    "Types"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wchang28/smartystreets-types.git"
+  },
+  "author": {
+    "name": "Wen Chang"
+  },
+  "license": "MIT"
+}
