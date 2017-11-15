@@ -1,6 +1,6 @@
 export declare namespace USStreetAddress {
     type AddressMatchType = "strict" | "range" | "invalid";
-    interface QueryParams {
+    interface QueryParamsItem {
         input_id?: string;
         street?: string;
         street2?: string;
@@ -14,6 +14,7 @@ export declare namespace USStreetAddress {
         candidates?: number;
         match?: AddressMatchType;
     }
+    type QueryParams = QueryParamsItem | QueryParamsItem[];
     interface Components {
         urbanization?: string;
         primary_number?: string;

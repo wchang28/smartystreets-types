@@ -6,7 +6,7 @@ export namespace USStreetAddress {
     | "invalid" // The API will return a single candidate for every properly submitted address, even if invalid or ambiguous.
     ;
 
-    export interface QueryParams {
+    export interface QueryParamsItem {
         input_id?: string;          // A unique identifier for this address used in your application; this field will be copied into the output.
         street?: string;            // blank The street line of the address, or the entire address ("freeform" input). Freeform inputs should NOT include any form of country information (like "USA").
         street2?: string;           // Any extra address information (e.g., Leave it on the front porch.)
@@ -20,6 +20,8 @@ export namespace USStreetAddress {
         candidates?: number         // Max Value: 10 The maximum number of valid addresses returned when the input is ambiguous
         match?: AddressMatchType;   // The match output strategy to be employed for this lookup
     }
+
+    export type QueryParams = QueryParamsItem | QueryParamsItem[];
 
     export interface Components {
         urbanization?: string;                  // Primarily for Puerto Rican addresses; a very important component which contains area, sector, or development within a geographic area; should be included after the name of the recipient
