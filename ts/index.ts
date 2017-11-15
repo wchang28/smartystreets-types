@@ -10,11 +10,11 @@ export namespace USStreetAddress {
         input_id?: string;          // A unique identifier for this address used in your application; this field will be copied into the output.
         street?: string;            // blank The street line of the address, or the entire address ("freeform" input). Freeform inputs should NOT include any form of country information (like "USA").
         street2?: string;           // Any extra address information (e.g., Leave it on the front porch.)
-        secondary?: string;	        // Apartment, suite, or office number (e.g., "Apt 52" or simply "52"; not "Apt52".)
+        secondary?: string;         // Apartment, suite, or office number (e.g., "Apt 52" or simply "52"; not "Apt52".)
         city?: string;              // The city name
         state?: string;             // The state name or abbreviation
-        zipcode?: string;	        // The ZIP Code
-        lastline?: string;	        // City, state, and ZIP Code combined
+        zipcode?: string;           // The ZIP Code
+        lastline?: string;          // City, state, and ZIP Code combined
         addressee?: string;         // The name of the recipient, firm, or company at this address
         urbanization?: string;      // Only used with Puerto Rico
         candidates?: number         // Max Value: 10 The maximum number of valid addresses returned when the input is ambiguous
