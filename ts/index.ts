@@ -305,7 +305,7 @@ export namespace InternationalStreetAddress {
         premise_number?: string;                        // The alphanumeric component of the premise field (E.g., if premise contains "Plot 7/7A" premise_number would contain "7/7A.")
         premise_type?: string;                          // The premise type component of the premise field (E.g., if premise contains "Plot 7/7A" premise_type would contain "Plot.")
         thoroughfare?: string;                          // All thoroughfare components combined
-        thoroughfare_predirection?: string;	            // The directional prefix component of the thoroughfare (E.g., if thoroughfare contains "N Main St" thoroughfare_predirection would contain "N."
+        thoroughfare_predirection?: string;             // The directional prefix component of the thoroughfare (E.g., if thoroughfare contains "N Main St" thoroughfare_predirection would contain "N."
         thoroughfare_postdirection?: string;            // The directional suffix component of the thoroughfare (E.g., if thoroughfare contains "Main St N" thoroughfare_postdirection would contain "N.")
         thoroughfare_name?: string;                     // The name component of the thoroughfare (E.g., if thoroughfare contains "Main St" thoroughfare_name would contain "Main.")
         thoroughfare_trailing_type?: string;            // The trailing thoroughfare type component of the thoroughfare (E.g., if thoroughfare contains "N Main St" thoroughfare_trailing_type would contain "St.")
@@ -339,25 +339,23 @@ export namespace InternationalStreetAddress {
     ;
 
     export interface Metadata {
-        latitude?: number;  // The horizontal component used for geographic positioning; it is the angle between 0° (the equator) and ±90° (north or south) at the poles measured in decimal degrees. It is the first value in an ordered pair of latitude, longitude. A negative number denotes a location south of the equator; a positive number is north. Combining lat/long values enables you to pinpoint addresses on a map.
-        longitude?: number; // The vertical component used for geographic positioning; it is the angle between 0° (the Prime Meridian) and ±180° (westward or eastward) measured in decimal degrees. It is the second number in an ordered pair of (latitude, longitude). A negative number indicates a location west of Greenwich, England; a positive number east. Combining lat/long values enables you to pinpoint addresses on a map.
+        latitude?: number;                      // The horizontal component used for geographic positioning; it is the angle between 0° (the equator) and ±90° (north or south) at the poles measured in decimal degrees. It is the first value in an ordered pair of latitude, longitude. A negative number denotes a location south of the equator; a positive number is north. Combining lat/long values enables you to pinpoint addresses on a map.
+        longitude?: number;                     // The vertical component used for geographic positioning; it is the angle between 0° (the Prime Meridian) and ±180° (westward or eastward) measured in decimal degrees. It is the second number in an ordered pair of (latitude, longitude). A negative number indicates a location west of Greenwich, England; a positive number east. Combining lat/long values enables you to pinpoint addresses on a map.
         geocode_precision?: GeocodePrecision    // Indicates the precision of the latitude and longitude values.
-        
-
-        max_geocode_precision?: string; // Indicates the highest possible geocode_precision for the address.
-        address_format?: string;        // A template that shows where we positioned the different address components on line 1, line 2, etc. (The format changes from one country to another.)
-                                        /*
-                                            Example:
-                                            
-                                            building | premise thoroughfare | postal_code locality
-                                            
-                                            Each "pipe" character (|) represents a line break. Following this guide, the numbered address fields would be composed accordingly:
-                                            
-                                            Address 1: building
-                                            Address 2: premise thoroughfare
-                                            Address 3: postal_code locality
-                                            This value is always blank for US addresses. Here's some additional info on the composition of US addresses.
-                                        */
+        max_geocode_precision?: string;         // Indicates the highest possible geocode_precision for the address.
+        address_format?: string;                // A template that shows where we positioned the different address components on line 1, line 2, etc. (The format changes from one country to another.)
+                                                /*
+                                                    Example:
+                                                    
+                                                    building | premise thoroughfare | postal_code locality
+                                                    
+                                                    Each "pipe" character (|) represents a line break. Following this guide, the numbered address fields would be composed accordingly:
+                                                    
+                                                    Address 1: building
+                                                    Address 2: premise thoroughfare
+                                                    Address 3: postal_code locality
+                                                    This value is always blank for US addresses. Here's some additional info on the composition of US addresses.
+                                                */
     }
 
     export type VerificationStatus
