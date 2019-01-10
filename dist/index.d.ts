@@ -1,3 +1,5 @@
+export declare type StateCode = ('AK' | 'AL' | 'AR' | 'AZ' | 'CA' | 'CO' | 'CT' | 'DC' | 'DE' | 'FL' | 'GA' | 'GU' | 'HI' | 'IA' | 'ID' | 'IL' | 'IN' | 'KS' | 'KY' | 'LA' | 'MA' | 'MD' | 'ME' | 'MI' | 'MN' | 'MO' | 'MS' | 'MT' | 'NC' | 'ND' | 'NE' | 'NH' | 'NJ' | 'NM' | 'NV' | 'NY' | 'OH' | 'OK' | 'OR' | 'PA' | 'PR' | 'RI' | 'SC' | 'SD' | 'TN' | 'TX' | 'UT' | 'VA' | 'VT' | 'WA' | 'WI' | 'WV' | 'WY');
+export declare type GeoPrecision = "Unknown" | "None" | "State" | "SolutionArea" | "City" | "Zip5" | "Zip6" | "Zip7" | "Zip8" | "Zip9" | "Structure";
 export declare namespace USStreetAddress {
     type AddressMatchType = "strict" | "range" | "invalid";
     interface QueryParamsItem {
@@ -30,7 +32,7 @@ export declare namespace USStreetAddress {
         pmb_number?: string;
         city_name?: string;
         default_city_name?: string;
-        state_abbreviation?: string;
+        state_abbreviation?: StateCode;
         zipcode?: string;
         plus4_code?: string;
         delivery_point?: string;
@@ -40,7 +42,7 @@ export declare namespace USStreetAddress {
     type ZipType = "Unique" | "Military" | "POBox" | "Standard";
     type ResidentialDeliveryIndicator = "Residential" | "Commercial";
     type eLOTSoreOrder = "A" | "D";
-    type CoordinatesPrecision = "Unknown" | "None" | "State" | "SolutionArea" | "City" | "Zip5" | "Zip6" | "Zip7" | "Zip8" | "Zip9" | "Structure";
+    type CoordinatesPrecision = GeoPrecision;
     interface Metadata {
         record_type?: RecordType;
         zip_type?: ZipType;
@@ -188,6 +190,45 @@ export declare namespace InternationalStreetAddress {
         components?: Components;
         metadata?: Metadata;
         analysis?: Analysis;
+    }
+    type QueryResult = QueryResultItem[];
+}
+export declare namespace USZipCode {
+    interface QueryParamsItem {
+        input_id?: string;
+        city?: string;
+        state?: string;
+        zipcode?: string;
+    }
+    type QueryParams = QueryParamsItem | QueryParamsItem[];
+    interface CityState {
+        city?: string;
+        state_abbreviation?: StateCode;
+        state?: string;
+        mailable_city?: boolean;
+    }
+    type ZipCodeType = "S" | "M" | "P" | "U";
+    type CoordinatesPrecision = GeoPrecision;
+    interface ZipCode {
+        zipcode?: string;
+        zipcode_type?: ZipCodeType;
+        default_city?: string;
+        county_fips?: string;
+        county_name?: string;
+        state_abbreviation?: StateCode;
+        state?: string;
+        latitude?: number;
+        longitude?: number;
+        precision?: CoordinatesPrecision;
+    }
+    type ResultStatus = "blank" | "invalid_state" | "invalid_city" | "invalid_zipcode" | "conflict";
+    interface QueryResultItem {
+        input_index?: number;
+        input_id?: string;
+        city_states?: CityState[];
+        zipcodes?: ZipCode[];
+        status?: ResultStatus;
+        reason?: string;
     }
     type QueryResult = QueryResultItem[];
 }

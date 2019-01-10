@@ -1,3 +1,19 @@
+export type StateCode = ('AK' | 'AL' | 'AR' | 'AZ' | 'CA' | 'CO' | 'CT' | 'DC' | 'DE' | 'FL' | 'GA' | 'GU' | 'HI' | 'IA' | 'ID' | 'IL' | 'IN' | 'KS' | 'KY' | 'LA' | 'MA' | 'MD' | 'ME' | 'MI' | 'MN' | 'MO' | 'MS' | 'MT' | 'NC' | 'ND' | 'NE' | 'NH' | 'NJ' | 'NM' | 'NV' | 'NY' | 'OH' | 'OK' | 'OR' | 'PA' | 'PR' | 'RI' | 'SC' | 'SD' | 'TN' | 'TX' | 'UT' | 'VA' | 'VT' | 'WA' | 'WI' | 'WV' | 'WY');
+
+export type GeoPrecision
+= "Unknown"         // Coordinates not known, possibly because address is invalid
+| "None"            // Coordinates are not provided for this address. Military addresses such as APO, FPO, and DPO do not provide coordinates.
+| "State"           // Reserved for future use
+| "SolutionArea"    // Reserved for future use
+| "City"            // Reserved for future use
+| "Zip5"            // Accurate to a 5-digit ZIP Code level (least precise)
+| "Zip6"            // Accurate to a 6-digit ZIP Code level
+| "Zip7"            // Accurate to a 7-digit ZIP Code level
+| "Zip8"            // Accurate to an 8-digit ZIP Code level
+| "Zip9"            // Accurate to a 9-digit ZIP Code level (most precise but NOT rooftop level)
+| "Structure"       // Reserved for future use
+;
+
 export namespace USStreetAddress {
 
     export type AddressMatchType
@@ -38,7 +54,7 @@ export namespace USStreetAddress {
         pmb_number?: string;	                // The private mailbox number, assigned by a CMRA
         city_name?: string;                     // The USPS-preferred city name for this particular address
         default_city_name?: string;             // The default city name for this 5-digit ZIP Code. This field will not be present if the default city name is equal to the value of the city name field.
-        state_abbreviation?: string;            // The two-letter state abbreviation
+        state_abbreviation?: StateCode;         // The two-letter state abbreviation
         zipcode?: string;                       // The 5-digit ZIP Code
         plus4_code?: string;                    // The 4-digit add-on code (more specific than 5-digit ZIP)
         delivery_point?: string;                // The last two digits of the house/box number, unless an "H" record is matched, in which case this is the secondary unit number representing the delivery point information to form the delivery point barcode (DPBC).
@@ -71,19 +87,7 @@ export namespace USStreetAddress {
     | "D"   // Descending
     ;
 
-    export type CoordinatesPrecision
-    = "Unknown"         // Coordinates not known, possibly because address is invalid
-    | "None"            // Coordinates are not provided for this address. Military addresses such as APO, FPO, and DPO do not provide coordinates.
-    | "State"           // Reserved for future use
-    | "SolutionArea"    // Reserved for future use
-    | "City"            // Reserved for future use
-    | "Zip5"            // Accurate to a 5-digit ZIP Code level (least precise)
-    | "Zip6"            // Accurate to a 6-digit ZIP Code level
-    | "Zip7"            // Accurate to a 7-digit ZIP Code level
-    | "Zip8"            // Accurate to an 8-digit ZIP Code level
-    | "Zip9"            // Accurate to a 9-digit ZIP Code level (most precise but NOT rooftop level)
-    | "Structure"       // Reserved for future use
-    ;
+    export type CoordinatesPrecision = GeoPrecision;
 
     export interface Metadata {
         record_type?: RecordType;               // Indicates the type of record that was matched. Only given if a DPV match is made.
@@ -391,4 +395,64 @@ export namespace InternationalStreetAddress {
     }
 
     export type QueryResult = QueryResultItem[];
-}    
+}
+
+export namespace USZipCode {
+
+    export interface QueryParamsItem {
+        input_id?: string;          // A unique identifier for this address used in your application; this field will be copied into the output.
+        city?: string;              // The city name
+        state?: string;             // The state name or abbreviation
+        zipcode?: string;           // The ZIP Code
+    }
+
+    export type QueryParams = QueryParamsItem | QueryParamsItem[];
+
+    export interface CityState {
+        city?: string;                  // The name of the city
+        state_abbreviation?: StateCode; // The official, two-letter state abbreviation
+        state?: string;                 // The state name
+        mailable_city?: boolean;        // A boolean value indicating whether or not the city name is an approved USPS mailing name
+    }
+
+    export type ZipCodeType
+    = "S"                               // Standard (regular ZIP Code)
+    | "M"                               // Military (APO/FPO military ZIP Code. Also includes DPO - Diplomatic addresses)
+    | "P"                               // P.O. Box (serves only post-office boxes)
+    | "U"                               // Unique (belongs primarily to a firm)
+    ;
+
+    export type CoordinatesPrecision = GeoPrecision;
+
+    export interface ZipCode {
+        zipcode?: string;                   // The 5-digit ZIP Code
+        zipcode_type?: ZipCodeType;         // The type of ZIP Code.
+        default_city?: string;              // A string containing the default city name for this ZIP Code
+        county_fips?: string;               // The county FIPS code
+        county_name?: string;               // The name of the county
+        state_abbreviation?: StateCode;     // The official, two-letter state abbreviation
+        state?: string;                     // The state name
+        latitude?: number;                  // The approximate latitude geo-coordinate
+        longitude?: number;                 // The approximate longitude geo-coordinate
+        precision?: CoordinatesPrecision;   // Indicates the precision of the latitude and longitude values.
+    }
+
+    export type ResultStatus
+    = "blank"                           // Blank lookup (you must provide a ZIP Code and/or City/State combination).
+    | "invalid_state"                   // Invalid State name or abbreviation.
+    | "invalid_city"                    // Invalid City for the given State.
+    | "invalid_zipcode"                 // Invalid ZIP Code.
+    | "conflict"                        // Conflicting ZIP Code/City/State information.
+    ;
+
+    export interface QueryResultItem {
+        input_index?: number;           // The positional index, or ordering, of the input that is associated with this result
+        input_id?: string;              // Any unique identifier that you used to reference the input address. The output will be identical to the input.
+        city_states?: CityState[];      // A list of cities and their states that match the input
+        zipcodes?: ZipCode[];           // A list of ZIP Codes that match the input
+        status?: ResultStatus;          // For a lookup with no matches, status classifies the kind of failure and always comes with a reason
+        reason?: string;                // For a lookup with no matches, reason explains why the lookup failed
+    }
+
+    export type QueryResult = QueryResultItem[];
+}
