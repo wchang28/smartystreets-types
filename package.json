@@ -1,9 +1,11 @@
 {
   "name": "smartystreets-types",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Type Definition for SmartyStreets API",
-  "typings": "./js/index.d.ts",
-  "scripts": {},
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "transpile": "tsc"
+  },
   "keywords": [
     "SmartyStreets",
     "API",
@@ -16,5 +18,8 @@
   "author": {
     "name": "Wen Chang"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.2.1"
+  }
 }
