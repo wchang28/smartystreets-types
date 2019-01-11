@@ -1,5 +1,10 @@
 export type StateCode = ('AK' | 'AL' | 'AR' | 'AZ' | 'CA' | 'CO' | 'CT' | 'DC' | 'DE' | 'FL' | 'GA' | 'GU' | 'HI' | 'IA' | 'ID' | 'IL' | 'IN' | 'KS' | 'KY' | 'LA' | 'MA' | 'MD' | 'ME' | 'MI' | 'MN' | 'MO' | 'MS' | 'MT' | 'NC' | 'ND' | 'NE' | 'NH' | 'NJ' | 'NM' | 'NV' | 'NY' | 'OH' | 'OK' | 'OR' | 'PA' | 'PR' | 'RI' | 'SC' | 'SD' | 'TN' | 'TX' | 'UT' | 'VA' | 'VT' | 'WA' | 'WI' | 'WV' | 'WY');
 
+export interface GeoCoordinates {
+    latitude?: number;                  // The approximate latitude geo-coordinate
+    longitude?: number;                 // The approximate longitude geo-coordinate
+}
+
 export type GeoPrecision
 = "Unknown"         // Coordinates not known, possibly because address is invalid
 | "None"            // Coordinates are not provided for this address. Military addresses such as APO, FPO, and DPO do not provide coordinates.
@@ -13,6 +18,10 @@ export type GeoPrecision
 | "Zip9"            // Accurate to a 9-digit ZIP Code level (most precise but NOT rooftop level)
 | "Structure"       // Reserved for future use
 ;
+
+export interface GeoCoordinatesWithPrecision extends GeoCoordinates {
+    precision?: GeoPrecision;           // Indicates the precision of the latitude and longitude values.
+}
 
 export namespace USStreetAddress {
 

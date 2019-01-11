@@ -1,5 +1,12 @@
 export declare type StateCode = ('AK' | 'AL' | 'AR' | 'AZ' | 'CA' | 'CO' | 'CT' | 'DC' | 'DE' | 'FL' | 'GA' | 'GU' | 'HI' | 'IA' | 'ID' | 'IL' | 'IN' | 'KS' | 'KY' | 'LA' | 'MA' | 'MD' | 'ME' | 'MI' | 'MN' | 'MO' | 'MS' | 'MT' | 'NC' | 'ND' | 'NE' | 'NH' | 'NJ' | 'NM' | 'NV' | 'NY' | 'OH' | 'OK' | 'OR' | 'PA' | 'PR' | 'RI' | 'SC' | 'SD' | 'TN' | 'TX' | 'UT' | 'VA' | 'VT' | 'WA' | 'WI' | 'WV' | 'WY');
+export interface GeoCoordinates {
+    latitude?: number;
+    longitude?: number;
+}
 export declare type GeoPrecision = "Unknown" | "None" | "State" | "SolutionArea" | "City" | "Zip5" | "Zip6" | "Zip7" | "Zip8" | "Zip9" | "Structure";
+export interface GeoCoordinatesWithPrecision extends GeoCoordinates {
+    precision?: GeoPrecision;
+}
 export declare namespace USStreetAddress {
     type AddressMatchType = "strict" | "range" | "invalid";
     interface QueryParamsItem {
